@@ -59,8 +59,6 @@ namespace CoreAPI_Filters.Controllers
 
         #endregion
 
-
-
         #region Actionfilter
         [HttpGet]
         [Route("getEmployeeByMangerId")]
@@ -77,6 +75,7 @@ namespace CoreAPI_Filters.Controllers
         [CustomActionFilter]
         // when you want to  try this attribute level go and comment the program.cs for add filter customactionfilter line because thats a globla decaltion works then we dont know 
         // this working or not
+        
         public IActionResult getEmployeeByMangerIdtwice()
         {
             Console.WriteLine("2:::: called inside action");
@@ -84,5 +83,7 @@ namespace CoreAPI_Filters.Controllers
             return Ok(new { message = "testing action filter" });
         } 
         #endregion
+
+
     }
 }
