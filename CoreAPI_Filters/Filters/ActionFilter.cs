@@ -9,14 +9,14 @@ namespace CoreAPI_Filters.Filters
         public override void OnActionExecuting
             (ActionExecutingContext context)
         {
-            Console.WriteLine(" 1::::::::::::::hellow im invoked before action method called before");
+            Console.WriteLine(" 1::::::::::::::action filter before called");
         }
 
         public override void OnActionExecuted
             (ActionExecutedContext context)
         {
-            Console.WriteLine("3::::::::::::hellow im excuted after action method" 
-                +context.Exception?.Message);
+            Console.WriteLine("3::::::::::::action filter after called"
+                + context.Exception?.Message);
         }
     }
 }

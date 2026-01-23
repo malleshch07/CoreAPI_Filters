@@ -20,12 +20,18 @@ namespace CoreAPI_Filters
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddScoped<IEmployeeRepo, EmployeeRepo>();
+            builder.Services.AddScoped<CacheFilter>();
 
-
+            builder.Services.AddMemoryCache();
             builder.Services.AddControllers(options => 
             { 
                 options.Filters.Add<GlobalExceptionFilter>();
-                options.Filters.Add<CustomActionFilter>(); });
+                options.Filters.Add<CustomActionFilter>();
+                options.Filters.Add<ResultResponseFilter>();
+                options.Filters.Add<CacheFilter>();
+            
+            });
+            
             var app = builder.Build();
           
             // Configure the HTTP request pipeline.
