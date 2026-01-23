@@ -104,6 +104,10 @@ namespace CoreAPI_Filters.Controllers
         }
 
 
+        #endregion
+
+        #region Cache
+
         [HttpPost]
 
         [Route("GetEmployeeDetailsBYCEO")]
@@ -113,9 +117,14 @@ namespace CoreAPI_Filters.Controllers
             return Ok(empdata);
 
         }
-
-
-
         #endregion
+
+        [HttpPost]
+        [Route("GetEmployeeBySalary")]
+        [ServiceFilter(typeof(AutherizeFilterOnly))]
+        public IActionResult GetEmployeeBySalary()
+        {
+            return Ok();
+        }
     }
 }
