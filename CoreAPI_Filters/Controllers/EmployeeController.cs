@@ -1,4 +1,5 @@
 ﻿using CoreAPI_Filters.Filters;
+using CoreAPI_Filters.Models;
 using CoreAPI_Filters.Repo;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,7 @@ namespace CoreAPI_Filters.Controllers
     public class EmployeeController : ControllerBase
     {
 
-      readonly  IEmployeeRepo emprepo;
+        readonly IEmployeeRepo emprepo;
 
         public EmployeeController(IEmployeeRepo emp)
         {
@@ -37,7 +38,7 @@ namespace CoreAPI_Filters.Controllers
         public IActionResult GetEmployeeBId()
         {
             string str = emprepo.GetData();
-
+            Console.WriteLine("action method execeued");
             return Ok(new { message = str });
         }
 
@@ -73,17 +74,48 @@ namespace CoreAPI_Filters.Controllers
         [HttpGet]
         [Route("getEmployeeByMangerIdtwice")]
         [CustomActionFilter]
+
+        [ResultResponseFilter]
         // when you want to  try this attribute level go and comment the program.cs for add filter customactionfilter line because thats a globla decaltion works then we dont know 
         // this working or not
-        
+
         public IActionResult getEmployeeByMangerIdtwice()
         {
             Console.WriteLine("2:::: called inside action");
 
             return Ok(new { message = "testing action filter" });
-        } 
+        }
         #endregion
 
+        #region Result/Response filter
 
+        [HttpGet]
+        [Route("getEmployeeByMangerName")]
+        [CustomActionFilter]
+        [ResultResponseFilter]
+        // when you want to  try this attribute level go and comment the program.cs for add filter customactionfilter line because thats a globla decaltion works then we dont know 
+        // this working or not
+
+        public IActionResult getEmployeeByMangerName()
+        {
+            Console.WriteLine("2:::: called inside action");
+
+            return Ok(new { message = "testing action filter" });
+        }
+
+
+        [HttpPost]
+
+        [Route("GetEmployeeDetailsBYCEO")]
+        [ServiceFilter(typeof(CacheFilter))]
+        public IActionResult GetEmployeeDetailsBYCEO([FromBody] EmployeeModel empdata)
+        {
+            return Ok(empdata);
+
+        }
+
+
+
+        #endregion
     }
 }
